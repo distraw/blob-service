@@ -1,0 +1,14 @@
+syntax = "proto3";
+package notes;
+
+service NoteManager {
+    rpc CreateNote(NoteRequest) returns (NoteResponse);
+}
+
+message NoteRequest {
+    string content = 1;
+}
+
+message NoteResponse {
+    uint32 id = 1;
+}

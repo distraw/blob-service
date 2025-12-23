@@ -1,6 +1,10 @@
-[package]
-name = "blob-service"
-version = "0.1.0"
-edition = "2024"
+[workspace]
+resolver = "3"
+members = ["proto"]
 
-[dependencies]
+[workspace.dependencies]
+tonic = "0.13"
+prost = "0.13"
+tonic-build = "0.13"
+prost-build = "0.13"
+tokio = { version = "1", features = ["full"] }

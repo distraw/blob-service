@@ -1,26 +1,8 @@
-// https://www.youtube.com/watch?v=JkSa-qA2jnY&t
+mod note;
 
-use tonic::{transport::Server, Request, Response, Status};
-
-use proto::notes::note_manager_server::{NoteManager, NoteManagerServer};
-use proto::notes::{NoteRequest, NoteResponse};
-
-#[derive(Debug, Default)]
-pub struct NoteService {}
-
-#[tonic::async_trait]
-impl NoteManager for NoteService {
-    async fn create_note(&self, request: Request<NoteRequest>) -> Result<Response<NoteResponse>, Status> {
-        let note = request.into_inner();
-        println!("Got a note: {:?}", note.content);
-
-        let reply = NoteResponse {
-            id: 123,
-        };
-
-        Ok(Response::new(reply))
-    }
-}
+use tonic::transport::Server;
+use proto::notes::note_manager_server::NoteManagerServer;
+use note::NoteService;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

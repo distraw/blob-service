@@ -1,6 +1,5 @@
 // https://github.com/distributed-lab/op_rand/blob/main/apps/cli/src/main.rs
 
-mod ui;
 mod actions;
 mod config;
 mod context;

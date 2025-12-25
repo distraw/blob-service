@@ -1,8 +1,10 @@
 [workspace]
 resolver = "3"
-members = ["client", "server", "crates/proto"]
+members = ["client", "server", "crates/proto", "crates/ui"]
 
 [workspace.dependencies]
+
+# protobuf
 tonic = "0.13"
 prost = "0.13"
 tonic-build = "0.13"

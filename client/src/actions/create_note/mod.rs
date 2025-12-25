@@ -1,16 +1,18 @@
 // https://github.com/distributed-lab/op_rand/blob/main/apps/cli/src/actions/create_challenge/mod.rs
 
 use clap::Args;
+
 use color_eyre::{
     eyre
 };
 use eyre::Context as _;
 
 use crate::{
-    ui,
     context::Context,
     blob::BlobClient,
 };
+
+use ui;
 
 #[derive(Args, Debug)]
 pub struct CreateNoteArgs {

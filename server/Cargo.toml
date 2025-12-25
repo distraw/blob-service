@@ -4,6 +4,10 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-proto.path = "../crates/proto"
+# protobuf
 tokio.workspace = true
 tonic.workspace = true
+
+# local
+proto.path = "../crates/proto"
+ui.path = "../crates/ui"

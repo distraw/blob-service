@@ -1,0 +1,5 @@
+services:
+  blob:
+    image: blob-service:latest
+    ports:
+      - "50051:50051"

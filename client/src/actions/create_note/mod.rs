@@ -47,7 +47,7 @@ pub async fn run(
     let id = client
         .create_note(content)
         .await
-        .wrap_err("blob service returned an error")?;
+        .wrap_err("failed to create a note at blob service")?;
 
     println!(
         "{}",

@@ -1,5 +1,7 @@
 mod note;
+mod config;
 mod cli;
+mod context;
 
 use clap::Parser;
 use cli::Cli;

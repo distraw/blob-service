@@ -1,12 +1,10 @@
-// https://github.com/distributed-lab/op_rand/blob/main/apps/cli/src/config.rs
-
-use std::path::PathBuf;
+use std::path::{PathBuf};
 use color_eyre::eyre;
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Clone, Serialize)]
 pub struct Config {
-    pub blob_url: String,
+    pub addr: String,
 }
 
 impl Config {

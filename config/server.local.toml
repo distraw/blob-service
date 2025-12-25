@@ -1,0 +1,2 @@
+# Address for blob service to listen incoming requests on
+addr = "[::1]:50051"

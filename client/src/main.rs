@@ -2,8 +2,8 @@
 
 mod actions;
 mod config;
-mod context;
 mod blob;
+mod context;
 
 use clap::Parser;
 

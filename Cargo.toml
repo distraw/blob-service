@@ -3,6 +3,18 @@ resolver = "3"
 members = ["client", "server", "crates/proto", "crates/ui"]
 
 [workspace.dependencies]
+eyre = "0.6"
+color-eyre = "0.6"
+
+clap = { version = "4.3.23", features = ["derive"] }
+clap-verbosity = { version = "2.1.0" }
+
+tracing-log = "0.2.0"
+tracing-subscriber = { version = "0.3", features = [
+    "fmt",
+    "ansi",
+    "tracing-log",
+] }
 
 # protobuf
 tonic = "0.13"

@@ -1,22 +1,17 @@
-// https://www.youtube.com/watch?v=JkSa-qA2jnY&t
+// https://github.com/distributed-lab/op_rand/blob/main/apps/cli/src/main.rs
 
-use proto::notes::note_manager_client::NoteManagerClient;
-use proto::notes::NoteRequest;
+mod ui;
+mod actions;
+mod config;
+mod context;
+mod blob;
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>>{
-    let mut client = NoteManagerClient::connect(
-        "http://[::1]:50051"
-    ).await?;
+use clap::Parser;
 
-    let request = tonic::Request::new(
-        NoteRequest {
-            content: "This is my test note!".to_owned(),
-        }
-    );
+use crate::actions::Cli;
 
-    let response = client.create_note(request).await?;
-    println!("Response: {:?}", response);
-
-    Ok(())
+#[tokio::main(flavor = "current_thread")]
+async fn main() -> eyre::Result<()>{
+    color_eyre::install()?;
+    Cli::parse().run().await
 }

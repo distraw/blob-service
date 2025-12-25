@@ -4,6 +4,20 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+eyre = "0.6"
+color-eyre = "0.6"
+clap = { version = "4.3.23", features = ["derive"] }
+clap-verbosity = { version = "2.1.0" }
+tracing-log = "0.2.0"
+tracing-subscriber = { version = "0.3", features = [
+    "fmt",
+    "ansi",
+    "tracing-log",
+] }
+config = { version = "0.15.19" }
+console = { version = "0.15" }
 tonic.workspace = true
 tokio.workspace = true
 proto.path = "../proto"
+serde = { version = "1.0.219", default-features = false, features = ["derive"] }
+serde_json = { version = "1.0.140", default-features = false }

@@ -18,6 +18,6 @@ config = { version = "0.15.19" }
 console = { version = "0.15" }
 tonic.workspace = true
 tokio.workspace = true
-proto.path = "../proto"
+proto.path = "../crates/proto"
 serde = { version = "1.0.219", default-features = false, features = ["derive"] }
 serde_json = { version = "1.0.140", default-features = false }

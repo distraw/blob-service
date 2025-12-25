@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["client","proto", "server"]
+members = ["client", "server", "crates/proto"]
 
 [workspace.dependencies]
 tonic = "0.13"

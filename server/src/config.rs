@@ -1,3 +1,5 @@
+// https://github.com/distributed-lab/op_rand/blob/main/apps/cli/src/config.rs
+
 use std::path::{PathBuf};
 use color_eyre::eyre;
 use serde::{Deserialize, Serialize};

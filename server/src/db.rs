@@ -1,3 +1,5 @@
+// Written independently
+
 use sqlx::{PgPool, Row, migrate::Migrator, postgres::PgPoolOptions};
 use eyre::{Result, eyre};
 use std::path::Path;

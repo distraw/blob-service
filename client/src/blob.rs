@@ -1,3 +1,4 @@
+// https://github.com/distributed-lab/op_rand/blob/main/apps/cli/src/esplora.rs
 
 use proto::notes::{Note, NoteId, note_manager_client::NoteManagerClient};
 use tonic::Request;

@@ -1,3 +1,5 @@
+// https://github.com/distributed-lab/op_rand/blob/main/apps/cli/src/main.rs
+
 mod note;
 mod config;
 mod cli;

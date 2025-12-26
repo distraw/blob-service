@@ -1,3 +1,5 @@
+// https://github.com/distributed-lab/op_rand/blob/main/apps/cli/src/ui.rs
+
 use console::style;
 
 const BORDER_LENGTH: usize = 20;

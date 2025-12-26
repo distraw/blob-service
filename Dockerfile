@@ -12,8 +12,10 @@ RUN cargo build -p server --release
 FROM debian:bookworm-slim
 
 RUN mkdir /usr/local/bin/config
+RUN mkdir /usr/local/bin/migrations
 
 COPY --from=builder /usr/src/app/config/server.local.toml /usr/local/bin/config/server.local.toml
+COPY --from=builder /usr/src/app/migrations /usr/local/bin/migrations
 COPY --from=builder /usr/src/app/target/release/server /usr/local/bin/server
 
 WORKDIR /usr/local/bin/

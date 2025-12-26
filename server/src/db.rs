@@ -1,6 +1,8 @@
-use sqlx::{PgPool, postgres::PgPoolOptions, Row};
-
+use sqlx::{PgPool, Row, migrate::Migrator, postgres::PgPoolOptions};
 use eyre::{Result, eyre};
+use std::path::Path;
+
+const MIGRATION_FOLDER: &str = "./migrations";
 
 #[derive(Clone, Debug, Default)]
 pub struct Database {
@@ -22,6 +24,15 @@ impl Database {
 
         self.pool = Some(pool);
 
+        Ok(())
+    }
+
+    pub async fn migrate(&mut self) -> Result<()> {
+        let pool = self.pool
+            .as_ref()
+            .ok_or_else(||eyre!("connection with DB is not established"))?;
+
+        Migrator::new(Path::new(MIGRATION_FOLDER)).await?.run(pool).await?;
         Ok(())
     }
 

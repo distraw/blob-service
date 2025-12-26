@@ -38,6 +38,7 @@ impl Cli {
 
         let mut db = Database::new();
         db.connect(db_url).await?;
+        db.migrate().await?;
 
         let note_service = NoteService{
             db: db,

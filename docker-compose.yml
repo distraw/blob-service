@@ -1,6 +1,9 @@
 services:
   blob:
     image: blob-service:latest
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "50051:50051"
   db:
@@ -23,3 +26,4 @@ services:
       retries: 5
 volumes:
   db-data:
+  db-init:

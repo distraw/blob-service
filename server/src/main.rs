@@ -2,6 +2,7 @@ mod note;
 mod config;
 mod cli;
 mod context;
+mod db;
 
 use clap::Parser;
 use cli::Cli;

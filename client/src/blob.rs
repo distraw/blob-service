@@ -26,7 +26,7 @@ impl BlobClient {
         Ok(())
     }
 
-    pub async fn create_note(&mut self, content: String) -> Result<u32> {
+    pub async fn create_note(&mut self, content: String) -> Result<i32> {
         let client = self
             .client
             .as_mut()

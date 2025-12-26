@@ -25,3 +25,5 @@ tonic.workspace = true
 # local
 proto.workspace = true
 ui.workspace = true
+
+sqlx = { version = "0.8", features = [ "runtime-tokio", "postgres", "macros" ] }

@@ -4,10 +4,13 @@ use tonic::{Request, Response, Status};
 use proto::notes::{NoteRequest, NoteResponse};
 use proto::notes::note_manager_server::NoteManager;
 
+use crate::db::Database;
 use ui;
 
 #[derive(Debug, Default)]
-pub struct NoteService {}
+pub struct NoteService {
+   pub db: Database,
+}
 
 #[tonic::async_trait]
 impl NoteManager for NoteService {
@@ -16,8 +19,17 @@ impl NoteManager for NoteService {
         println!("{}", ui::success_footer("New note arrived"));
         println!("Content: {:?}", note.content);
 
+        let id = self
+            .db
+            .insert(note.content)
+            .await
+            .map_err(|e| {
+            // Map internal error to tonic::Status
+            Status::internal(format!("DB insert failed: {}", e))
+        })?;
+
         let reply = NoteResponse {
-            id: 123,
+            id: id,
         };
 
         Ok(Response::new(reply))

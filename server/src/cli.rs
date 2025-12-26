@@ -11,6 +11,7 @@ use tonic::transport::Server;
 use proto::notes::note_manager_server::NoteManagerServer;
 
 use crate::{note::NoteService, context::Context};
+use crate::db::Database;
 
 use ui;
 
@@ -33,7 +34,14 @@ impl Cli {
         let mut context = Context::new(self.config);
 
         let addr = context.config()?.addr;
-        let note_service = NoteService::default();
+        let db_url = context.config()?.db_url;
+
+        let mut db = Database::new();
+        db.connect(db_url).await?;
+
+        let note_service = NoteService{
+            db: db,
+        };
 
         println!("{}", ui::header("🎯 BLOB-SERVICE 🎯"));
 

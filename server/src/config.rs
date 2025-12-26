@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Deserialize, Clone, Serialize)]
 pub struct Config {
     pub addr: String,
+    pub db_url: String, 
 }
 
 impl Config {

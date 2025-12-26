@@ -1,6 +1,5 @@
 
-use proto::notes::note_manager_client::NoteManagerClient;
-use proto::notes::NoteRequest;
+use proto::notes::{Note, NoteId, note_manager_client::NoteManagerClient};
 use tonic::Request;
 use tonic::transport::channel::Channel;
 
@@ -32,11 +31,25 @@ impl BlobClient {
             .as_mut()
             .ok_or_else(||eyre!("client is not connected to blob service"))?;
 
-        let request = Request::new(NoteRequest {
+        let request = Request::new(Note {
             content: content,
         });
 
         let response = client.create_note(request).await?;
         Ok(response.into_inner().id)
+    }
+
+    pub async fn get_note(&mut self, id: i32) -> Result<String> {
+        let client = self
+            .client
+            .as_mut()
+            .ok_or_else(||eyre!("client is not connected to blob service"))?;
+
+        let request = Request::new(NoteId {
+            id: id,
+        });
+
+        let response = client.get_note(request).await?;
+        Ok(response.into_inner().content)
     }
 }

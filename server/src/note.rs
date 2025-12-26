@@ -1,7 +1,7 @@
 // https://www.youtube.com/watch?v=JkSa-qA2jnY&t
 
 use tonic::{Request, Response, Status};
-use proto::notes::{NoteRequest, NoteResponse};
+use proto::notes::{Note, NoteId};
 use proto::notes::note_manager_server::NoteManager;
 
 use crate::db::Database;
@@ -14,7 +14,7 @@ pub struct NoteService {
 
 #[tonic::async_trait]
 impl NoteManager for NoteService {
-    async fn create_note(&self, request: Request<NoteRequest>) -> Result<Response<NoteResponse>, Status> {
+    async fn create_note(&self, request: Request<Note>) -> Result<Response<NoteId>, Status> {
         let note = request.into_inner();
         println!("{}", ui::success_footer("New note arrived"));
         println!("Content: {:?}", note.content);
@@ -24,14 +24,33 @@ impl NoteManager for NoteService {
             .insert(note.content)
             .await
             .map_err(|e| {
-            // Map internal error to tonic::Status
-            Status::internal(format!("DB insert failed: {}", e))
+                Status::internal(format!("DB insert failed: {}", e))
         })?;
 
-        let reply = NoteResponse {
+        let reply = NoteId {
             id: id,
         };
 
+        Ok(Response::new(reply))
+    }
+
+    async fn get_note(&self, request: Request<NoteId>) -> Result<Response<Note>, Status> {
+        let noteid = request.into_inner();
+        println!("{}", ui::success_footer("New request for note arrived"));
+        println!("ID: {:?}", noteid.id);
+
+        let content = self
+            .db
+            .fetch(noteid.id)
+            .await
+            .map_err(|e| {
+                Status::internal(format!("DB fetch failed: {}", e))
+            })?;
+
+        let reply = Note {
+            content: content,
+        };
+        
         Ok(Response::new(reply))
     }
 }

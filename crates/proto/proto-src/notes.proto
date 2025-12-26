@@ -2,13 +2,14 @@ syntax = "proto3";
 package notes;
 
 service NoteManager {
-    rpc CreateNote(NoteRequest) returns (NoteResponse);
+    rpc CreateNote(Note) returns (NoteID);
+    rpc GetNote(NoteID) returns (Note);
 }
 
-message NoteRequest {
+message Note {
     string content = 1;
 }
 
-message NoteResponse {
+message NoteID {
     int32 id = 1;
 }

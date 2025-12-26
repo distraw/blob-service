@@ -6,12 +6,14 @@ use tracing_log::AsTrace;
 
 use crate::{
     actions::{
-        create_note::CreateNoteArgs
+        create_note::CreateNoteArgs,
+        get_note::GetNoteArgs,
     },
     context::Context,
 };
 
 mod create_note;
+mod get_note;
 
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
@@ -30,6 +32,7 @@ pub struct Cli {
 pub enum Commands {
     // Create a note
     CreateNote(CreateNoteArgs),
+    GetNote(GetNoteArgs),
 }
 
 impl Cli {
@@ -47,5 +50,6 @@ async fn execute_command(command: Commands, context: Context) -> eyre::Result<()
     use Commands as Cmd;
     match command {
         Cmd::CreateNote(cmd) => create_note::run(cmd, context).await,
+        Cmd::GetNote(cmd) => get_note::run(cmd, context).await,
     }
 }

@@ -1,0 +1,2 @@
+# URL of the blob service to connect to
+blob_url = "http://localhost:50051"

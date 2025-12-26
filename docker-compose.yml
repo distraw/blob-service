@@ -1,0 +1,27 @@
+services:
+  blob:
+    image: blob-service:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "50051:50051"
+  db:
+    image: postgres:latest
+    hostname: host-db
+    container_name: db-container
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=user_0
+      - POSTGRES_PASSWORD=password_0
+      - POSTGRES_DB=database_0
+      - PGDATA=/pgdata
+    volumes:
+      - db-data:/pgdata
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U signer -d database_0" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  db-data:

@@ -1,0 +1,5 @@
+# Address for blob service to listen incoming requests on
+addr = "0.0.0.0:50051"
+
+# Database URL
+db_url = "postgres://user_0:password_0@db:5432/database_0"

@@ -1,0 +1,29 @@
+[package]
+name = "server"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+eyre.workspace = true
+color-eyre.workspace = true
+
+clap.workspace = true
+clap-verbosity.workspace = true
+
+tracing-log.workspace = true
+tracing-subscriber.workspace = true
+
+config.workspace = true
+
+serde.workspace = true
+serde_json.workspace = true
+
+# protobuf
+tokio.workspace = true
+tonic.workspace = true
+
+# local
+proto.workspace = true
+ui.workspace = true
+
+sqlx = { version = "0.8", features = [ "runtime-tokio", "postgres", "macros" ] }
